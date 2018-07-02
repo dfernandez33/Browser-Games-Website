@@ -153,7 +153,7 @@ export class SnakeComponent implements AfterViewInit {
       p.fill(255);
       p.textSize(30)
       p.textAlign(p.CENTER);
-      p.text("DAVID JOSE FERNANDEZ", p.width / 2, 85)
+      p.text("Press the arrow keys to start playing!", p.width / 2, 85)
     }
 
     let arrow_keys_handler = (e) => {
