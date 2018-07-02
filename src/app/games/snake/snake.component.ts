@@ -140,7 +140,7 @@ export class SnakeComponent implements AfterViewInit {
       p.fill(snake.SNAKE_COLOR);
       p.textSize(40);
       p.textAlign(p.LEFT);
-      p.text("SHIT!: " + snake.size, 10, 35);
+      p.text("Score!: " + snake.size, 10, 35);
     }
 
     let drawEdge = () => {

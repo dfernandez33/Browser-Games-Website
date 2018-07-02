@@ -20,7 +20,7 @@ export class Snake {
     //length of the snake's tail. Initialized to one because of head
     size: number = 0;
 
-    SNAKE_COLOR: string = '#0000FF';
+    SNAKE_COLOR: string = '#0CE900';
 
     constructor(p: any) {
         this.p = p;
