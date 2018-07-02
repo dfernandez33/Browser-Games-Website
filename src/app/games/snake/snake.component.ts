@@ -90,6 +90,7 @@ export class SnakeComponent implements AfterViewInit {
 
     p.keyPressed = () => {
       //record which way the snake is moving and set turn pivot
+      document.addEventListener("keydown", arrow_keys_handler, false);
       if (p.keyCode === p.RIGHT_ARROW && snake.direction != Direction.LEFT) {
         if (state == State.START) {
           state = State.PLAYING;
@@ -154,6 +155,14 @@ export class SnakeComponent implements AfterViewInit {
       p.textAlign(p.CENTER);
       p.text("Press the arrow keys to start playing!", p.width / 2, 85)
     }
+
+    let arrow_keys_handler = (e) => {
+      switch(e.keyCode){
+          case 37: case 39: case 38:  case 40: // Arrow keys
+          case 32: e.preventDefault(); break; // Space
+          default: break; // do not block other keys
+      }
+    };
 
   }
 
