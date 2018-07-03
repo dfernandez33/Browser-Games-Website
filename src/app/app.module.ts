@@ -9,6 +9,7 @@ import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 
+
 @NgModule({
   declarations: [
     AppComponent,

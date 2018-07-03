@@ -6,6 +6,8 @@ import { Food } from './classes/food';
 import { Direction } from './enums/direction.enum';
 import { Coordinate } from './classes/coordinate';
 import { State } from './enums/state.enum';
+import { MyHammerConfig } from './classes/hamemrConfig';
+
 
 @Component({
   selector: 'app-snake',
@@ -41,6 +43,8 @@ export class SnakeComponent implements AfterViewInit {
 
     let state: State;
 
+    let hammerConfig = new MyHammerConfig();
+    let hammer = hammerConfig.buildHammer(document.getElementById('gameContainer'));
 
     p.setup = () => {
       state = State.START;
@@ -51,6 +55,8 @@ export class SnakeComponent implements AfterViewInit {
       p.frameRate(10);
       snake = new Snake(p);
       food = new Food(p);
+      //sets up listener to enable touch detection
+      setupTouch();
     };
   
     //main game loop
@@ -140,7 +146,7 @@ export class SnakeComponent implements AfterViewInit {
       p.fill(snake.SNAKE_COLOR);
       p.textSize(40);
       p.textAlign(p.LEFT);
-      p.text("Score!: " + snake.size, 10, 35);
+      p.text("Score: " + snake.size, 10, 35);
     }
 
     let drawEdge = () => {
@@ -163,6 +169,32 @@ export class SnakeComponent implements AfterViewInit {
           default: break; // do not block other keys
       }
     };
+
+    let setupTouch = () => {
+      hammer.on('swipe', (event) => {
+        if (event.direction == Direction.LEFT && snake.direction != Direction.RIGHT) {
+          if (state == State.START) {
+            state = State.PLAYING;
+          }
+          snake.direction = Direction.LEFT;
+        } else if (event.direction == Direction.RIGHT && snake.direction != Direction.LEFT) {
+          if (state == State.START) {
+            state = State.PLAYING;
+          }
+          snake.direction = Direction.RIGHT;
+        } else if (event.direction == Direction.UP && snake.direction != Direction.DOWN) {
+          if (state == State.START) {
+            state = State.PLAYING;
+          }
+          snake.direction = Direction.UP;
+        } else if (event.direction == Direction.DOWN && snake.direction != Direction.UP) {
+          if (state == State.START) {
+            state = State.PLAYING;
+          }
+          snake.direction = Direction.DOWN;
+        }
+      });
+    }
 
   }
 
