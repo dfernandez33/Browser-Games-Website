@@ -43,6 +43,7 @@ export class SnakeComponent implements AfterViewInit {
 
     let state: State;
 
+    //set up hammer.js instance to detect touch events
     let hammerConfig = new MyHammerConfig();
     let hammer = hammerConfig.buildHammer(document.getElementById('gameContainer'));
 
