@@ -14,13 +14,20 @@ import { MyHammerConfig } from './classes/hamemrConfig';
   templateUrl: './snake.component.html',
   styleUrls: ['./snake.component.css']
 })
-export class SnakeComponent implements AfterViewInit {
+export class SnakeComponent implements AfterViewInit, OnInit {
 
   //instance of p5 object
   private p5;
-  private width: number;
+
+  //used to determine device size
+  public width: number;
 
   constructor() { }
+
+  ngOnInit() {
+    this.width = window.innerWidth;
+    console.log(this.width);
+  }
 
   ngAfterViewInit() {
     this.createCanvas();
@@ -34,6 +41,7 @@ export class SnakeComponent implements AfterViewInit {
   private sketch(p: any) {
     //anything declared here can be accessed in helper functions.
     //Use this space for "global" variables.
+    let screenWidth = window.innerWidth;
 
     let width: number;
     let height: number;
@@ -45,13 +53,21 @@ export class SnakeComponent implements AfterViewInit {
 
     //set up hammer.js instance to detect touch events
     let hammerConfig = new MyHammerConfig();
-    let hammer = hammerConfig.buildHammer(document.getElementById('gameContainer'));
+    let hammer;
 
     p.setup = () => {
       state = State.START;
-      width = document.getElementById('gameContainer').offsetWidth;
-      height = width;
-      p.createCanvas(width, height).parent('gameContainer');
+      if (screenWidth > 800) {
+        width = document.getElementById('gameContainer').offsetWidth;
+        height = width;
+        hammer = hammerConfig.buildHammer(document.getElementById('gameContainer'));
+        p.createCanvas(width, height).parent('gameContainer');
+      } else {
+        width = document.getElementById('phoneGame').offsetWidth;
+        height = window.innerHeight - document.getElementById('navbar').offsetHeight;
+        hammer = hammerConfig.buildHammer(document.getElementById('phoneGame'));
+        p.createCanvas(width, height).parent('phoneGame');
+      }
       p.background(0);
       p.frameRate(10);
       snake = new Snake(p);
@@ -122,9 +138,11 @@ export class SnakeComponent implements AfterViewInit {
     }
 
     p.windowResized = () => {
+      /*
       width = document.getElementById('gameContainer').offsetWidth;
       height = width;
       p.resizeCanvas(width, height);
+      */
     }
 
     //this method checks for collisions with food as well as collisions with the snake itself.
