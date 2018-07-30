@@ -9,6 +9,6 @@ export class AppComponent {
 
   private p5;
 
-  constructor(){}
+  constructor() {}
 
 }

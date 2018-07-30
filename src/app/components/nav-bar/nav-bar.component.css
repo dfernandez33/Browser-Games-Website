@@ -10,3 +10,16 @@
     color: #5F6760;
     font-size: xx-large;
 }
+
+.user-image {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    margin-right: 10px;
+    margin-left: 0;
+}
+
+.user-name {
+    margin-right: 20px;
+    margin-left: 0px;
+}

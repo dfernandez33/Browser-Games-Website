@@ -1,15 +1,18 @@
 <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-primary" id="navbar">
-    <a class="navbar-brand" href="">Game Corner <fa name="gamepad" size="lg"></fa></a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" 
-    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" (click)="toggleNavBar()">
+    <a class="navbar-brand" routerLink="">Game Corner
+        <fa name="gamepad" size="lg"></fa>
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+        aria-expanded="false" aria-label="Toggle navigation" (click)="toggleNavBar()">
         <span class="navbar-toggler-icon"></span>
     </button>
-    
-    <div class="collapse navbar-collapse" id="navbarSupportedContent"
-        [ngClass]="{ 'show': navbarOpen }">
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent" [ngClass]="{ 'show': navbarOpen }">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" routerLink="">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link" routerLink="">Home
+                    <span class="sr-only">(current)</span>
+                </a>
             </li>
             <li class="nav-item dropdown">
                 <div ngbDropdown class="d-inline-block">
@@ -20,9 +23,13 @@
                 </div>
             </li>
         </ul>
-        <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
+        <button *ngIf="!isLoggedIn" class="btn btn-success my-2 my-sm-0" (click)="goToLogin()">Log In</button>
+        <div *ngIf="isLoggedIn" class="nav-item">
+            <img src="{{user.profile_picture}}" class="user-image">
+        </div>
+        <div *ngIf="isLoggedIn" class="nav-item user-name">
+            {{user.name}}
+        </div>
+        <button *ngIf="isLoggedIn" class="btn btn-danger my-2 my-sm-0" (click)="logOut()">Log out</button>
     </div>
 </nav>
